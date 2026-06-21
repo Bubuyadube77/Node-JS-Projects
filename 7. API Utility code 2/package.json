@@ -1,0 +1,12 @@
+{
+  "name": "1.-wild-horizons-api",
+  "version": "1.0.0",
+  "description": "a dataset of the planet's most interesting places",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Bubuya Z Dube",
+  "license": "ISC"
+}

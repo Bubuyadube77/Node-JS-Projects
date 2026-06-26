@@ -1,0 +1,23 @@
+import { getData } from "../Utils/getData.js"
+import { sendResponse } from "../Utils/sendResponse.js"
+import { parseJSONBody } from "../Utils/parseJSONBody.js"
+import { addNewSighting } from "../Utils/addNewSighting.js"
+import { sanitizeInput } from "../Utils/sanitizeInput.js"
+
+export async function handleGet(res) {
+    const data = await getData()
+    const content = JSON.stringify(data)
+    sendResponse(res, 200, 'application/json', content)
+}
+
+export async function handlePost(req, res) {
+    try {
+        const parsedBody = await parseJSONBody(req)
+        const sanitizedBody = sanitizeInput(parsedBody)
+        await addNewSighting(sanitizedBody)
+        sendResponse(res, 201, 'application/json', JSON.stringify(sanitizedBody))
+    }
+    catch (err) {
+        sendResponse(res, 400, 'application/json', JSON.stringify({error: err}))
+    } 
+}
